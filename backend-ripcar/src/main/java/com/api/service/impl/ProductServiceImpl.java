@@ -44,5 +44,10 @@ public class ProductServiceImpl implements ProductService {
         return repository.findByType(type);
     }
 
+    @Override
+    public List<String> searchBytypeJPQL() {
+        return repository.findByName();
+    }
+
 
 }

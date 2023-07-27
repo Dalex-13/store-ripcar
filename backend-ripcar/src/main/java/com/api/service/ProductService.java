@@ -18,4 +18,6 @@ public interface ProductService {
 
     public List<Product> searchByType(String type);
 
+    public List<String> searchBytypeJPQL();
+
 }

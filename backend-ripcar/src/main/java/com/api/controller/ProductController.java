@@ -54,4 +54,9 @@ public class ProductController {
         return service.searchByType(type);
     }
 
+    @GetMapping("/search/jpql")
+    public List<String> searchByName(){
+        return service.searchBytypeJPQL();
+    }
+
 }

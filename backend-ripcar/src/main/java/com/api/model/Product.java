@@ -17,7 +17,7 @@ public class Product {
 
     private String description;
     private int amount;
-    private String price;
+    private double price;
 
     public String getType() {
         return type;
@@ -43,11 +43,11 @@ public class Product {
         this.amount = amount;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 }
