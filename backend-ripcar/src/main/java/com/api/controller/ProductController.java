@@ -2,22 +2,28 @@ package com.api.controller;
 
 import com.api.model.Product;
 import com.api.service.ProductService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PostUpdate;
+import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/product")
 public class ProductController {
 
-    @Autowired
-    private ProductService service;
+    private final ProductService service;
 
-    @PostMapping
-    public Product createProduct(@RequestBody Product product){
-        return service.createProduct(product);
+
+    @PostMapping("/post")
+    public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product){
+        return new ResponseEntity<>(service.createProduct(product), HttpStatus.CREATED) ;
     }
 
     @GetMapping
