@@ -1,4 +1,4 @@
-package com.api.service.impl;
+package com.api.service;
 
 import com.api.model.roles.UserEntity;
 
