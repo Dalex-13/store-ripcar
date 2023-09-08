@@ -1,22 +1,23 @@
 package com.api.service;
 
+import com.api.dto.ProductDTO;
 import com.api.model.Product;
 
 import java.util.List;
 
 public interface ProductService {
 
-    public Product createProduct(Product product);
+    public ProductDTO createProduct(ProductDTO productDTO);
 
-    public List<Product> listProducts();
+    public List<ProductDTO> listProducts();
 
-    public Product searchById(long id);
+    public ProductDTO searchById(long id);
 
-    public Product updateProduct(Product product);
+    public ProductDTO updateProduct(ProductDTO productDTO, Long id);
 
     public void deleteProductById(long id);
 
-    public List<Product> searchByType(String type);
+    public List<ProductDTO> searchByType(String type);
 
     public List<String> searchBytypeJPQL();
 

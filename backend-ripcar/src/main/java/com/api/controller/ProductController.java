@@ -1,5 +1,6 @@
 package com.api.controller;
 
+import com.api.dto.ProductDTO;
 import com.api.model.Product;
 import com.api.service.ProductService;
 import jakarta.validation.Valid;
@@ -22,32 +23,28 @@ public class ProductController {
 
 
     @PostMapping("/post")
-    public ResponseEntity<Product> createProduct(@RequestBody @Valid Product product){
-        return new ResponseEntity<>(service.createProduct(product), HttpStatus.CREATED) ;
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody @Valid ProductDTO productDTO){
+        return new ResponseEntity<>(service.createProduct(productDTO), HttpStatus.CREATED) ;
     }
 
     @GetMapping("/listAll")
-    public List<Product> listAllProduct(){
+    public List<ProductDTO> listAllProduct(){
         return service.listProducts();
     }
 
     @GetMapping("/search/{id}")
-    public Product searchById(@PathVariable long id){
-        return service.searchById(id);
+    public ResponseEntity<ProductDTO> searchById(@PathVariable(name = "id") long id){
+        //ProductDTO responseProduct = service.searchById(id);
+
+        return ResponseEntity.ok(service.searchById(id));
     }
 
+
     @PutMapping("/search/{id}")
-    public Product updateProduct(@RequestBody Product product, @PathVariable long id){
+    public ResponseEntity<ProductDTO> updateProduct(@RequestBody @Valid ProductDTO productDTO, @PathVariable(name = "id") Long id){
+        ProductDTO responseProduct = service.updateProduct(productDTO, id);
 
-        Product updateProduct = service.searchById(id);
-        updateProduct.setType(product.getType());
-        updateProduct.setDescription(product.getDescription());
-        updateProduct.setAmount(product.getAmount());
-        updateProduct.setPrice(product.getPrice());
-
-        service.updateProduct(updateProduct);
-
-        return updateProduct;
+        return new ResponseEntity<>(responseProduct, HttpStatus.OK);
     }
 
     @DeleteMapping("/search/{id}")
@@ -56,8 +53,9 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public List<Product> searchByType(@RequestParam("type") String type){
-        return service.searchByType(type);
+    public ResponseEntity<List<ProductDTO>> searchByType(@RequestParam("type") String type){
+
+        return new ResponseEntity<>(service.searchByType(type), HttpStatus.OK);
     }
 
     @GetMapping("/search/jpql")
